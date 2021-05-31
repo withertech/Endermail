@@ -1,0 +1,83 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+    id 'dev.ethp.bukkit' version '0.2.2'
+    id 'java'
+}
+
+group = 'com.withertech'
+version = '1.0-SNAPSHOT'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+
+    maven {
+        name = 'spigotmc-repo'
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+    }
+
+    maven {
+        name = 'sonatype'
+        url = 'https://oss.sonatype.org/content/groups/public/'
+    }
+
+    maven {
+        name = 'jitpack'
+        url = 'https://jitpack.io'
+    }
+}
+
+shadowJar {
+    relocate 'com.github.stefvanschie.inventoryframework', 'shadow.inventoryframework'
+}
+
+dependencies {
+    implementation 'org.jetbrains:annotations:20.1.0'
+    spigotApi {
+        version '1.16.5-R0.1-SNAPSHOT'
+    }
+    vaultApi {
+        version '1.7'
+    }
+
+    compile 'com.github.stefvanschie.inventoryframework:IF:0.9.7'
+}
+
+bukkit {
+    name 'Endermail'
+    main 'com.withertech.endermail.Endermail'
+
+    version rootProject.version
+    description 'Mail delivery service for your server!'
+
+    author 'Witherking25'
+
+    api {
+        version '1.16.5'
+    }
+
+    command 'mail', {
+        permission 'mail.admin'
+        description 'Main command for Endermail'
+        usage '/mail <subcommand>'
+    }
+
+    permission 'mail.admin', {
+        description 'Gives access to /mail'
+    }
+
+    loadAt POSTWORLD
+
+    dependency 'Vault', OPTIONAL
+    dependency 'MultiVerse-Core', OPTIONAL
+}
+
+processResources {
+    from(sourceSets.main.resources.srcDirs) {
+        filter ReplaceTokens, tokens: [version: version]
+    }
+}

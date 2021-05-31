@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SimpleProject" default="copy" basedir = ".">
+
+    <basename file="${basedir}" property="project.projectname"/>
+    <property name="project.pluginsLocation" location="${basedir}/srv/plugins"/>
+
+    <target name="clean" description="Cleans project">
+        <delete file="${project.pluginsLocation}/${project.projectname}.jar"/>
+    </target>
+
+    <target name="copy" description="Create a jar for the project" depends="clean">
+        <copy todir="${project.pluginsLocation}">
+            <fileset dir="${basedir}/build/libs" />
+            <globmapper from="*" to="${project.projectname}.jar" />
+        </copy>
+    </target>
+</project>

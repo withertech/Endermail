@@ -1,0 +1,206 @@
+# All intervals are in ticks (20 ticks = 1 second)
+BalanceTopTimerInterval: 180
+AccountsSavedPerRun: 1
+
+currencyNameSingular: "Coin"
+currencyNamePlural: "Coins"
+startingBalance: 100.00
+# Changing the locale will change wht format the money is in, see 
+# https://www.techonthenet.com/js/language_tags.php for examples.
+locale: "en-US"
+# Note: The custom symbol may not work if minecraft doesn't allow that symbol.
+#       The custom symbol may need to be in unicode format (e.g. \u26C3 for 
+#       dollar sign) to be able to work.
+customSymbolEnabled: false
+customSymbol: ""
+
+mysql:
+  use-mysql: false
+  host: "localhost"
+  port: 1111
+  database: "database"
+  username: "username"
+  password: "password"
+
+deathtax:
+  fractionenabled: 'false'
+  # the fraction amount to be taken. Default: 1/100 will be taken (1%)
+  # EXAMPLE: If this were 20 it would be 1/20 therefore it would take 5%
+  # EXAMPLE: If this were 40 it would be 1/40 therefore it would take 2.5%
+  fraction: 100
+  amountenabled: 'false'
+  # this is the exact amount that will be taked on death
+  amount: 10.00
+  # If this is set to true, it will send the person who bypasses the death event a message.
+  # If false, it will not send the bypass message.
+  sendBypassMessage: 'true'
+  sendTaxMessage: 'true'
+
+suffixes:
+  # amount is multiplied by 10^number.
+  # e.g. for k, the amount is multiplied by 10^3 (1,000)
+  k: 3
+  K: 3
+  m: 6
+  M: 6
+  b: 9
+  B: 9
+  t: 12
+  T: 12
+  q: 15
+  Q: 15
+
+messages:
+
+  prefix: "&9EconomyX&f:"
+  nopermission:
+      - "%prefix% &4You don't have permissions to do that!"
+  playersOnly:
+    - "%prefix% &cOnly players can run that command!"
+      
+  balance:
+    usage:
+      - "%prefix% &cUsage: /balance"
+      - "%prefix% &cUsage: /balance {player}"
+    noAccount:
+      - "%prefix% &cYou don't have an account!"
+    balance:
+      - "%prefix% &aYour balance is &e%balance%."
+    otherNoAccount:
+      - "%prefix% &5%player% &cdoesn't have an account!"
+    otherBalance:
+      - "%prefix% &5%player%&a's balance is &e%balance%."
+    otherBalanceToggled:
+      - "%prefix% &4The other player has their balance toggled!"
+  
+  money:
+  
+    invalidSubCommand:
+      - "%prefix% &cThat sub-command doesn't exist!"
+    
+    give:
+      usage:
+        - "%prefix% &cUsage: /money give {player} {amount}"
+      otherDoesntExist:
+        - "%prefix% &5%player% &cdoesn't exist!"
+      otherNoAccount:
+        - "%prefix% &5%player% &cdoesn't have an account!"
+      invalidAmount:
+        - "%prefix% &5%amount% &cis invalid!"
+      sent:
+        - "%prefix% &aYou sent &e%amount% &ato &5%player%."
+      received:
+        - "%prefix% &aYou were given &e%amount%."
+        
+    help:
+      usage:
+        - "%prefix% &cUsage: /money help"
+      message:
+        - "&aRunning &9EconomyX &av2.5.5"
+        - "%prefix% &eCommands:"
+        - "%prefix% &b/money help"
+        - "%prefix% &b/balancetop"
+        - "%prefix% &b/balance"
+        - "%prefix% &b/balance {player}"
+        - "%prefix% &b/pay {player} {amount}"
+    
+    reload:
+      usage:
+        - "%prefix% &cUsage: /money reload"
+      reloaded:
+        - "%prefix% &aYou reloaded the economy."
+    
+    set:
+      usage:
+        - "%prefix% &cUsage: /money set <player> <amount>"
+      otherDoesntExist:
+        - "%prefix% &5%player% &cdoesn't exist!"
+      otherNoAccount:
+        - "%prefix% &5%player% &cdoesn't have an account!"
+      invalidAmount:
+        - "%prefix% &5%amount% &cis invalid!"
+      setter:
+        - "%prefix% &5%player%&a's balance was set to &e%balance%."
+      set:
+        - "%prefix% &e%amount% &awas taken from your account."
+    
+    take:
+      usage:
+        - "%prefix% &cUsage: /money take <player> <amount>"
+      otherDoesntExist:
+        - "%prefix% &5%player% &cdoesn't exist!"
+      otherNoAccount:
+        - "%prefix% &5%player% &cdoesn't have an account!"
+      invalidAmount:
+        - "%prefix% &5%amount% &cis invalid!"
+      insufficientFunds:
+        - "%prefix% &5%player% &chas insufficient funds!"
+      take:
+        - "%prefix% &e%amount% &awas taken from &5%player%&a's account."
+      taken:
+        - "%prefix% &e%amount% &awas taken from your account."
+  
+  pay:
+    usage:
+      - "%prefix% &cUsage: /pay <player> <amount>"
+    otherDoesntExist:
+      - "%prefix% &5%player% &cdoesn't exist!"
+    noAccount:
+      - "%prefix% &cYou don't have an account!"
+    otherNoAccount:
+      - "%prefix% &5%player% &cdoesn't have an account!"
+    cannotPaySelf:
+      - "%prefix% &cYou cannot pay yourself!"
+    invalidAmount:
+      - "%prefix% &5%amount% &cis invalid!"
+    insufficientFunds:
+      - "%prefix% &cYou have insufficient funds!"
+    paid:
+      - "%prefix% &aYou paid &5%player% &e%amount%."
+    received:
+      - "%prefix% &aYou were paid &e%amount% by &5%player%."
+    paystopped:
+      - "%prefix% &4You cannot use /pay because an admin disabled it for you!"
+    paytoggled:
+      - "%prefix% &4You cannot pay that player because they have payments off - /paytoggle"
+    
+  top:
+    usage:
+      - "%prefix% &cUsage: /balancetop"
+      - "%prefix% &cUsage: /balancetop <Page Number>"
+    noAccounts:
+      - "%prefix% &cThere are no accounts!"
+    invalidTop:
+      - "%prefix% &5%top% &cis invalid!"
+    notEnoughPlayers:
+      - "%prefix% &cThere are not enough players!"
+    message:
+      - "%prefix% &b%rank%. &a%player%: &b%balance%"
+    self:
+      - "%prefix% &b%rank%. &a%player%: &b%balance% (YOU)"
+  paytoggle:
+    toggledon:
+      - "%prefix% &6You have toggled your payments &aON&f."
+      - "&7&lNOTE&f: This is just for players paying you."
+    toggledoff:
+      - "%prefix% &6You have toggled your payments &cOFF&f."
+      - "&7&lNOTE&f: This is just for players paying you."
+  paystop:
+    usage:
+      - "%prefix% &cUsage: /paystop <Player>"
+      - "&7&lNOTE&f: This will stop the player from doing the /pay command (It can be toggled by re-toggling it)."
+    toggledon:
+      - "%prefix% &6You have toggled the /pay command &aON &ffor that player."
+      - "&7&lNOTE&f: This is just for players paying you."
+    toggledoff:
+      - "%prefix% &6You have toggled the /pay command &cOFF &ffor that player."
+      - "&7&lNOTE&f: This is just for players paying you."
+  balancetoggle:
+    toggledon:
+      - "%prefix% &6You have toggled your balance being seen &aON&f."
+    toggledoff:
+      - "%prefix% &6You have toggled your balance being seen &cOFF&f."
+    toggledonother:
+      - "%prefix% &6You have toggled the other players balance being seen &aON&f."
+    toggledoffother:
+        - "%prefix% &6You have toggled the other players balance being seen &cOFF&f."
