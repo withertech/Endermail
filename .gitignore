@@ -27,7 +27,7 @@ atlassian-ide-plugin.xml
 
 # Package Files #
 *.jar
-!spigot-1.16.5.jar
+!srv/**.jar
 *.war
 *.nar
 *.ear
