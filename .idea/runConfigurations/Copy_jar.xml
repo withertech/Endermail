@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Copy jar" type="AntRunConfiguration">
+    <antsettings antfile="file://$PROJECT_DIR$/build.ant" target="copy" />
+    <method v="2">
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="ShadowJar" run_configuration_type="GradleRunConfiguration" />
+    </method>
+  </configuration>
+</component>

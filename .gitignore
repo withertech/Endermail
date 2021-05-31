@@ -1,11 +1,11 @@
 # User-specific stuff
 .idea/
-!.idea/runConfigurations/*
+!/.idea/runConfigurations/
 *.iml
 *.ipr
 *.iws
-srv/world*/*
-srv/logs/*
+/srv/world*/*
+/srv/logs/*
 
 # IntelliJ
 out/
